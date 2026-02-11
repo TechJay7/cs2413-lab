@@ -8,6 +8,7 @@ int target = 0;
    int i = 0;
     int j = i + 1;
     int k = n - 1;
+        // n complexity
     for(; i < n; i++)
     {
         if(!(i < j && j < k))

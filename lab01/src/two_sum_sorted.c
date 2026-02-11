@@ -7,6 +7,7 @@ int two_sum_sorted(const int* nums, int n, int target, int* out_i, int* out_j) {
 
     int i = 0;
     int j = n - 1;
+    // n complexity
     for(int k = 0; k < n; k++)
     {
         if(nums[i] + nums[j] < target)

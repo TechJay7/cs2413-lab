@@ -27,7 +27,49 @@
 
 int* plusOne(int* digits, int digitsSize, int* returnSize) {
     // TODO: implement
+    int newSize = digitsSize; // we can assume the best case that theyre the same size
+    int allNines = 1; 
+   for(int i = digitsSize - 1; i >= 0; i--)
+   {
+    if(digits[i] != 9)
+    {
+        allNines = 0;
+        break;
+    }
+   
+   }
+        // so now if the code comes here we assume theres only 9's
+        if(allNines)
+        newSize = digitsSize + 1;
 
-    
+    int* arr = (int*)malloc(newSize * sizeof(int));
+    if (arr == NULL) { //make sure not null or crash
+    *returnSize = 0;
+    return NULL;
+}
+    int shifter = newSize - digitsSize; // we can use this to see if a shift was made
+
+    for(int i = 0; i < digitsSize; i++)
+    {
+        arr[i + shifter] = digits[i];
+    }
+
+    if(allNines)
+    arr[0] = 0;
+
+    for (int i = newSize - 1; i >= 0; i--)
+    {
+        if(arr[i] != 9)
+        {
+            arr[i]++;
+            break;
+        }
+        arr[i] = 0;
+    }
+
+    *returnSize = newSize;
+    return arr;
+
+
 }
 

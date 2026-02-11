@@ -11,7 +11,7 @@ int two_sum(const int* nums, int n, int target, int* out_i, int* out_j) {
 
     int count = 0;
     
-
+        // n^2 complexity
     for(int i = 0; i < n -1; i++)
     {
         for(int j = 1; j < n; j++) 

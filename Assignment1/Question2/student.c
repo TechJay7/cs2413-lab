@@ -16,7 +16,17 @@
 
 int majorityElement(int* nums, int numsSize) {
      // TODO: implement
+     //O(n^2)
+     for (int i = 0; i < numsSize - 1; i++) //sorting first so biggest number is in the middle
+          for(int j = 0; j < numsSize - 1; j++)
+               if(nums[j] > nums[j+1])
+               {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+               }
 
-
+     
+     return nums[numsSize/2];
 
 }
