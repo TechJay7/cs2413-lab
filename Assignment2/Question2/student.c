@@ -21,18 +21,54 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-
+#include <stdlib.h>
 struct TreeNode {
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
+// Hint: One common O(n) approach:
+    // - Use a recursive helper that returns the subtree height,
+    //   and returns -1 if subtree is invalid (BST violation or unbalanced).
+   
+//helper
+int helper(struct TreeNode* node, int* prev, bool* first)
+{
+    if (node == NULL)
+        return 0;
+
+    int lHeight = helper(node->left, prev, first);
+
+    if (lHeight == -1)
+        return -1;
+
+    if(!(*first) && node -> val <= *prev) //its a duplicate
+        return -1;
+        
+    *first = false;
+    *prev = node-> val;
+
+    
+    int rHeight = helper(node->right, prev, first);
+    if (rHeight == -1)
+        return -1;
+//height-balanced: abs(height(left) - height(right)) <= 1 at every node
+    int diff = abs(lHeight - rHeight);
+
+    if (diff > 1)
+        return -1;
+
+    if (lHeight > rHeight) //off by 1
+        return ++lHeight; 
+    else
+        return ++rHeight;
+}
 
 bool isAVL(struct TreeNode* root) {
     // TODO: implement
-    // Hint: One common O(n) approach:
-    // - Use a recursive helper that returns the subtree height,
-    //   and returns -1 if subtree is invalid (BST violation or unbalanced).
-    (void)root;
-    return false;
+    int prev = 0;
+    bool first = true;
+    return helper(root, &prev, &first) != -1;
+
+   
 }

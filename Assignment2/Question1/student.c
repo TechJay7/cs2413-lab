@@ -27,7 +27,17 @@ struct TreeNode {
 struct TreeNode* bstSearch(struct TreeNode* root, int target) {
     // TODO: implement
     // Hint: Use the BST property to decide whether to go left or right.
-    (void)root;
-    (void)target;
+    while(root != NULL){
+        if (target == root->val)
+            return root;
+    
+        else if (target < root->val)
+            root = root->left; //go left
+    
+
+        else
+            root = root->right; //go right
+    
+}
     return NULL;
 }
