@@ -1,5 +1,5 @@
 #include <stdbool.h>
-
+#include <stddef.h>
 /*
 Question 1: Bubble Sort
 
@@ -30,13 +30,45 @@ Notes:
 
 void bubbleSort(int arr[], int size) {
     // TODO: implement basic bubble sort
-    (void)arr;
-    (void)size;
+    if (arr == NULL || size <= 1)
+        return;
+    
+        for (int i = 0; i < size - 1; i++)
+            for (int j = 0; j < size - 1 - i; j++)
+                if (arr[j] > arr[j + 1])
+                {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+
+        
+
+    
 }
 
 void bubbleSortOptimized(int arr[], int size) {
     // TODO: implement optimized bubble sort with early stopping
-    (void)arr;
-    (void)size;
+    if (arr == NULL || size <= 1)
+        return;
+
+    for (int i = 0; i < size - 1; i++)
+    {
+        bool swapped = false;
+
+        for (int j = 0; j < size - 1 - i; j++)
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = true;
+            }
+
+            if(!swapped)
+                return;
+
+        
+    }
 }
 
