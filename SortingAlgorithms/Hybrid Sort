@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include "Insertion Sort"
+#include "Merge Sort"
+
+void insertionSortRange(int arr[], int left, int right)
+{
+    int size = right - left + 1;
+    int temp[size];
+
+    for (int i = 0; i < size; i++)
+        temp[i] = arr[left + i];
+
+    insertionSort(temp, size);
+
+    for (int i = 0; i < size; i++)
+        arr[left + i] = temp[i];
+}
+
+void hybridSortHelper(int arr[], int left, int right)
+{
+    if (right - left + 1 <= 4)
+    {
+        insertionSortRange(arr, left, right);
+        return;
+    }
+
+    int mid = left + (right - left) / 2;
+
+    hybridSortHelper(arr, left, mid);
+    hybridSortHelper(arr, mid + 1, right);
+
+    merge(arr, left, mid, right);
+}
+
+void hybridSort(int arr[], int size)
+{
+    if (arr == NULL || size <= 1)
+        return;
+
+    hybridSortHelper(arr, 0, size - 1);
+}
+
+int main()
+{
+    int arr[] = {39, 9, 81, 45, 90, 27, 72, 18};
+    int size = 8;
+
+    printf("Before: ");
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+
+    hybridSort(arr, size);
+
+    printf("After:  ");
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+
+    return 0;
+}
